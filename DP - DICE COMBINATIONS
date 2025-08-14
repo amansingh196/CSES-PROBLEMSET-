@@ -1,0 +1,26 @@
+INTUTION : NUMBER OF WAYS (DP)
+
+#include<iostream>
+#include<vector>
+using namespace std;
+const int MOD = 1e9 + 7;
+int solveRE(int target,vector<int>&dp) {
+  if(target<0) return 0;
+  if(target==0) return 1;
+  if(target>=0)
+  if(dp[target]!=-1) return dp[target];
+  int ans = 0;
+  for(int i=1;i<=6;i++) {
+    ans = ((ans + solveRE(target-i,dp))%MOD);
+  }
+  dp[target] = ans;
+  return dp[target]%MOD;
+}
+
+int main() {
+ int target;
+ cin>>target;
+ vector<int>dp(target+1,-1);
+ cout<<solveRE(target,dp);
+ return 0;
+}
